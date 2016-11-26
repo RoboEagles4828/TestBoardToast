@@ -40,11 +40,11 @@ public class Drive {
         }
         double mult = (((-leftStick.getThrottle()+1)/2)*.99);
         //double mult = 1;
-        tankDrive(-leftStick.getY() * mult, -rightStick.getY() * mult, true);
-    }
-    public void tankDrive(double leftValue, double rightValue, boolean squaredInputs) {
-        if (squaredInputs) {
-            if (leftValue >= 0.0) {
+                tankDrive(-leftStick.getY() * mult, -rightStick.getY() * mult, true);
+            }
+        public void tankDrive(double leftValue, double rightValue, boolean squaredInputs) {
+            if (squaredInputs) {
+                if (leftValue >= 0.0) {
                 leftValue = (leftValue * leftValue);
             } else {
                 leftValue = -(leftValue * leftValue);
@@ -70,5 +70,48 @@ public class Drive {
             frontRight.set(-rightOutput);
         }
         backRight.set(-rightOutput);
+    }
+    public void arcadeDrive(GenericHID stick) {
+        this.arcadeDrive(stick, true);
+    }
+
+    public void arcadeDrive(GenericHID stick, boolean squaredInputs) {
+        arcadeDrive(stick.getY(), stick.getX(), squaredInputs);
+    }
+
+    public void arcadeDrive(double moveValue, double rotateValue, boolean squaredInputs) {
+        double leftMotorSpeed;
+        double rightMotorSpeed;
+
+        if (squaredInputs) {
+            if (moveValue >= 0.0) {
+                moveValue = (moveValue * moveValue);
+            } else {
+                moveValue = -(moveValue * moveValue);
+            }
+            if (rotateValue >= 0.0) {
+                rotateValue = (rotateValue * rotateValue);
+            } else {
+                rotateValue = -(rotateValue * rotateValue);
+            }
+        }
+        if (moveValue > 0.0) {
+            if (rotateValue > 0.0) {
+                leftMotorSpeed = moveValue - rotateValue;
+                rightMotorSpeed = Math.max(moveValue, rotateValue);
+            } else {
+                leftMotorSpeed = Math.max(moveValue, -rotateValue);
+                rightMotorSpeed = moveValue + rotateValue;
+            }
+        } else {
+            if (rotateValue > 0.0) {
+                leftMotorSpeed = -Math.max(-moveValue, rotateValue);
+                rightMotorSpeed = moveValue + rotateValue;
+            } else {
+                leftMotorSpeed = moveValue - rotateValue;
+                rightMotorSpeed = -Math.max(-moveValue, -rotateValue);
+            }
+        }
+        setLeftRightMotorOutputs(leftMotorSpeed, rightMotorSpeed);
     }
 }

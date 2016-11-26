@@ -183,6 +183,35 @@
         </option>
       </ExternalSystemSettings>
     </configuration>
+    <configuration default="false" factoryName="Application" type="Application" name="TestBoardToast-Sim" folderName="Launch">
+      <option name="MAIN_CLASS_NAME" value="jaci.openrio.toast.core.ToastBootstrap"/>
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/run"/>
+      <option name="PROGRAM_PARAMETERS" value="-sim --search -ide IDEA"/>
+      <module name="TestBoardToast"/>
+    </configuration>
+    <configuration default="false" factoryName="Application" type="Application" name="TestBoardToast-Verify" folderName="Launch">
+      <option name="MAIN_CLASS_NAME" value="jaci.openrio.toast.core.ToastBootstrap"/>
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/run"/>
+      <option name="PROGRAM_PARAMETERS" value="-verify -sim --search -ide IDEA"/>
+      <module name="TestBoardToast"/>
+    </configuration>
+    <configuration default="false" factoryName="Remote" type="Remote" name="TestBoardToast-Remote" folderName="Remote">
+      <option name="HOST" value="roborio-4828.local"/>
+      <option name="PORT" value="5910"/>
+      <option name="USE_SOCKET_TRANSPORT" value="true"/>
+      <module name="TestBoardToast"/>
+    </configuration>
+    <configuration default="false" factoryName="Gradle" type="GradleRunConfiguration" name="TestBoardToast-Deploy" folderName="Gradle">
+      <ExternalSystemSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/build.gradle"/>
+        <option name="externalSystemIdString" value="GRADLE"/>
+        <option name="taskNames">
+          <list>
+            <option value="deploy"/>
+          </list>
+        </option>
+      </ExternalSystemSettings>
+    </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false"/>
   <component name="SvnConfiguration" maxAnnotateRevisions="500">

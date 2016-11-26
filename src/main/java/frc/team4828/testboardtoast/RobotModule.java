@@ -1,12 +1,16 @@
 package frc.team4828.testboardtoast;
 
-        import jaci.openrio.toast.lib.log.Logger;
-        import jaci.openrio.toast.lib.module.IterativeModule;
+import edu.wpi.first.wpilibj.Joystick;
+import jaci.openrio.toast.lib.log.Logger;
+import jaci.openrio.toast.lib.module.IterativeModule;
 
 public class RobotModule extends IterativeModule {
 
     public static Logger logger;
     public Drive d;
+    public Joystick j1;
+    public Joystick j2;
+
     @Override
     public String getModuleName() {
         return "TestBoardToast";
@@ -21,10 +25,11 @@ public class RobotModule extends IterativeModule {
     public void robotInit() {
         logger = new Logger("TestBoardToast", Logger.ATTR_DEFAULT);
         d = new Drive(9,8,7,6);
-        //TODO: Module Init
+        j1 = new Joystick(0);
+        j2 = new Joystick(1);
     }
 
     public void teleopPeriodic() {
-        d.set(0.1,0.1,0.1,0.1);
+        d.arcadeDrive(j1);
     }
 }
